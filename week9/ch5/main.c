@@ -2,35 +2,36 @@
 #include<string.h>
 #include<stdio.h>
 #include<stdlib.h>
+#include"SeqStack.c"
 #include"SeqStack.h"
 
-struct BtNode//½Úµã
+struct BtNode//èŠ‚ç‚¹
 {
     char ch;
  
-    struct BtNode *LChild;//×óº¢×Ó
+    struct BtNode *LChild;//å·¦å­©å­
 
-    struct BtNode *RChild;//ÓÒº¢×Ó
+    struct BtNode *RChild;//å³å­©å­
 
-    int flag;//½Úµã±êÖ¾
+    int flag;//èŠ‚ç‚¹æ ‡å¿—
 };
 
-//·Çµİ¹é±éÀú
+//éé€’å½’éå†
 
 void nonRecursion(struct BtNode *root)
 {
-    //´´½¨Õ»
+    //åˆ›å»ºæ ˆ
     SeqStack myStack = init_SeqStack();
 
-    //¸ù½øÕ¾
+    //æ ¹è¿›ç«™
     Push_SeqStack(myStack,root);
 
-    //Õ»ÖĞÔªËØ´óÓÚ0£¬ÈëÕ»
+    //æ ˆä¸­å…ƒç´ å¤§äº0ï¼Œå…¥æ ˆ
     while (size_SeqStack(myStack)>0)
     {
-        //È¡Õ»¶¥ÔªËØ
+        //å–æ ˆé¡¶å…ƒç´ 
         struct BtNode * topNode=top_SeqStack(myStack);
-        //³öÕ»
+        //å‡ºæ ˆ
         Pop_SeqStack(myStack);
 
         if(topNode->flag==1)
@@ -39,35 +40,35 @@ void nonRecursion(struct BtNode *root)
             continue;
         }
         
-        //Èô±êÖ¾Î»Îª¼Ù£¬¸ÄÎªÕæ
+        //è‹¥æ ‡å¿—ä½ä¸ºå‡ï¼Œæ”¹ä¸ºçœŸ
         topNode->flag=1;
 
-        //ÅĞ¶ÏÓÒ×ÓÊ÷£¬´æÔÚÔòÈëÕ»
+        //åˆ¤æ–­å³å­æ ‘ï¼Œå­˜åœ¨åˆ™å…¥æ ˆ
         if (topNode->RChild!=NULL)
         {
             Push_SeqStack(myStack,topNode->RChild);
         }
         
-        //ÅĞ¶Ï×ó×ÓÊ÷£¬´æÔÚÔòÈëÕ»
+        //åˆ¤æ–­å·¦å­æ ‘ï¼Œå­˜åœ¨åˆ™å…¥æ ˆ
         if (topNode->LChild!=NULL)
         {
             Push_SeqStack(myStack,topNode->LChild);
         }
 
-        //¸ùÈëÕ»
+        //æ ¹å…¥æ ˆ
         Push_SeqStack(myStack,topNode);
     }
 
-    //ÊÍ·ÅÕ¾
+    //é‡Šæ”¾ç«™
     destroy_SeqStack(myStack);
     
 
 }
 
-//´´½¨¶ş²æÊ÷²¢²Ù×÷
+//åˆ›å»ºäºŒå‰æ ‘å¹¶æ“ä½œ
 void Text()
 {
-    //Éú²ú½Úµã
+    //ç”Ÿäº§èŠ‚ç‚¹
     struct BtNode  NodeA ={'A',NULL,NULL,0};
     struct BtNode  NodeB ={'B',NULL,NULL,0};
     struct BtNode  NodeC ={'C',NULL,NULL,0};
@@ -77,7 +78,7 @@ void Text()
     struct BtNode  NodeG ={'G',NULL,NULL,0};
     struct BtNode  NodeH ={'H',NULL,NULL,0};
 
-    //´´½¨½Úµã¹ØÏµ
+    //åˆ›å»ºèŠ‚ç‚¹å…³ç³»
     NodeA.LChild = &NodeB;
     NodeA.RChild = &NodeF;
 
