@@ -1,44 +1,44 @@
 #include<stdio.h>
 #define N 100
 
-int Heap[N];//½¨Á¢Ò»¸ö¶ÑÊı×é£¬Æä×î´óÈİÁ¿ÊÇN
-int Heap_size = 0;//¶ÑÖĞµ±Ç°ÔªËØµÄÊıÁ¿
+int Heap[N];//å»ºç«‹ä¸€ä¸ªå †æ•°ç»„ï¼Œå…¶æœ€å¤§å®¹é‡æ˜¯N
+int Heap_size = 0;//å †ä¸­å½“å‰å…ƒç´ çš„æ•°é‡
 
-//Èë¶Ñ
-void put(int d)//Heap[0]ÊÇ¶Ñ¶¥
+//å…¥å †
+void put(int d)//Heap[0]æ˜¯å †é¡¶
 {
-    int now, father, temp;//nowÊÇµ±Ç°Ö¸ÏòµÄÔªËØ£¬fatherÊÇÆä¸¸½Úµã
-    Heap[Heap_size] = d;//½«ĞÂÔªËØÈë¶Ñ
+    int now, father, temp;//nowæ˜¯å½“å‰æŒ‡å‘çš„å…ƒç´ ï¼Œfatheræ˜¯å…¶çˆ¶èŠ‚ç‚¹
+    Heap[Heap_size] = d;//å°†æ–°å…ƒç´ å…¥å †
     Heap_size++;
-    now = Heap_size-1;//nowÖ¸ÏòĞÂÔªËØ
-    while (now > 1){
-        father = now >> 1;//fatherÖ¸ÏòÆäfuqjiedian
-        if (Heap[father] < Heap[now]){//Èô·ûºÏĞ¡¸ù¶Ñ¾ÍÖ±½Ó½áÊøÑ­»·
+    now = Heap_size-1;//nowæŒ‡å‘æ–°å…ƒç´ 
+    while (now >= 1){
+        father = now >> 1;//fatheræŒ‡å‘å…¶fuqjiedian
+        if (Heap[father] < Heap[now]){//è‹¥ç¬¦åˆå°æ ¹å †å°±ç›´æ¥ç»“æŸå¾ªç¯
             break;
         }
         else{
-            temp = Heap[now];//Èô²»·ûºÏĞ¡¸ù¶Ñ£¬¾Í½»»»¸¸×Ó½ÚµãµÄÖµ
+            temp = Heap[now];//è‹¥ä¸ç¬¦åˆå°æ ¹å †ï¼Œå°±äº¤æ¢çˆ¶å­èŠ‚ç‚¹çš„å€¼
             Heap[now] = Heap[father];
             Heap[father] = temp;
-            now = father;//²¢½«nowÖ¸Ïò¸¸½Úµã½øĞĞÏÂÒ»´ÎÅĞ¶Ï
+            now = father;//å¹¶å°†nowæŒ‡å‘çˆ¶èŠ‚ç‚¹è¿›è¡Œä¸‹ä¸€æ¬¡åˆ¤æ–­
         }
     }
 }
 
-//³ö¶Ñ
+//å‡ºå †
 int get()
 {
-    int now = 0, son, res = Heap[0], temp;//nowÊÇµ±Ç°Ö¸ÏòµÄÔªËØ£¬sonÊÇÆä×Ó½Úµã
+    int now = 0, son, res = Heap[0], temp;//nowæ˜¯å½“å‰æŒ‡å‘çš„å…ƒç´ ï¼Œsonæ˜¯å…¶å­èŠ‚ç‚¹
     Heap[0] = Heap[Heap_size-1];
     Heap_size--;
-    //ÖØĞÂÕûÀí³ÉĞ¡¸ù¶Ñ
-    while ((now * 2 + 1) < Heap_size){//µ±´æÔÚ×ó×ÓÊ÷Ê±
+    //é‡æ–°æ•´ç†æˆå°æ ¹å †
+    while ((now * 2 + 1) < Heap_size){//å½“å­˜åœ¨å·¦å­æ ‘æ—¶
         son = now * 2 + 1;
-        if ((now * 2 + 2) < Heap_size && Heap[now * 2 + 1] > Heap[now * 2 + 2]){//µ±´æÔÚÓÒ×ÓÊ÷ÇÒÓÒ×ÓÊ÷½ÏĞ¡Ê±
+        if ((now * 2 + 2) < Heap_size && Heap[now * 2 + 1] > Heap[now * 2 + 2]){//å½“å­˜åœ¨å³å­æ ‘ä¸”å³å­æ ‘è¾ƒå°æ—¶
             son++;
         }
 
-        temp = Heap[now];//Èô²»·ûºÏĞ¡¸ù¶Ñ£¬¾Í½»»»¸¸×Ó½ÚµãµÄÖµ
+        temp = Heap[now];//è‹¥ä¸ç¬¦åˆå°æ ¹å †ï¼Œå°±äº¤æ¢çˆ¶å­èŠ‚ç‚¹çš„å€¼
         Heap[now] = Heap[son];
         Heap[son] = temp;
         now = son;
@@ -49,9 +49,9 @@ int get()
 int main()
 {
     int i, n;
-    printf("ÇëÊäÈë¶ÑµÄ³¤¶È");
+    printf("è¯·è¾“å…¥å †çš„é•¿åº¦");
     scanf("%d", &n);
-    printf("ÇëÊäÈë¶ÑµÄÔªËØ");
+    printf("è¯·è¾“å…¥å †çš„å…ƒç´ ");
     for (i = 0; i < n; i++){
         scanf("%d", &Heap[i]);
         put(Heap[i]);
